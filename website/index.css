@@ -1,0 +1,26 @@
+body {
+    height: 85vh;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0px;
+}
+
+label {
+    position: absolute;
+    text-align: left;
+    width: 100%;
+    color: #fff;
+    left: 4px;
+    position: relative;
+}
+
+input {
+    background-color: #222;
+    border: 2px solid #444;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: white;
+}

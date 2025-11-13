@@ -14,7 +14,7 @@ function calculate(formula) {
         var parts = [formula.slice(0, indecies[0]), formula.slice(indecies[0] + 1, indecies[1]), formula.slice(indecies[1] + 1)];
 
         parts[1] = calculate(parts[1])
-        formula = parts.join()
+        formula = parts.join("")
     }
 
     formula = formula.split(/([\+\-\*\/])/)
@@ -34,12 +34,12 @@ function calculate(formula) {
                 if (formula[i - 1] == undefined) continue;
                 if (formula[i + 1] == undefined) continue;
 
-                var num1 = formula[i] == "-" ? "-" + formula[i+1] : formula[i+1];
-                var num2 = formula[i-2] == "-" ? "-" + formula[i-1] : formula[i-1];
+                var num1 = formula[i] == "-" ? "-" + formula[i + 1] : formula[i + 1];
+                var num2 = formula[i - 2] == "-" ? "-" + formula[i - 1] : formula[i - 1];
 
                 var result = add(num1, num2);
-                console.log(result, num1, num2);
-                formula.splice(i-1-(formula[i-2] == "-"), 3+(formula[i-2] == "-"), result);
+                formula.splice(i - 1 - (formula[i - 2] == "-"), 3 + (formula[i - 2] == "-"), result);
+                console.log(result)
                 break;
             }
         }

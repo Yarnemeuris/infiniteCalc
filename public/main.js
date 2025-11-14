@@ -12,6 +12,26 @@ function display(formula, output) {
     document.querySelector("#outputs").innerHTML = outputPreset.replace("$", formula).replace("€", output) + document.querySelector("#outputs").innerHTML;
 }
 
+function executeOperation(formula, regex, operation) {
+    loop: {
+        while (true) {
+            for (var i = 1; ; i++) {
+                if (formula[i] == undefined) break loop;
+                if (formula[i].match(regex) == null) continue;
+                if (formula[i - 1] == undefined) continue;
+                if (formula[i + 1] == undefined) continue;
+
+                var num1 = formula[i] == "-" ? "-" + formula[i + 1] : formula[i + 1];
+                var num2 = formula[i - 2] == "-" ? "-" + formula[i - 1] : formula[i - 1];
+
+                var result = operation(num1, num2);
+                formula.splice(i - 1 - (formula[i - 2] == "-"), 3 + (formula[i - 2] == "-"), result);
+                break;
+            }
+        }
+    }
+}
+
 function calculate(formula) {
     if (formula == "") return "0.";
 
@@ -34,24 +54,9 @@ function calculate(formula) {
         formula[index] = value + "."
     })
 
-    loop: {
-        while (true) {
-            for (var i = 1; ; i++) {
-                if (formula[i] == undefined) break loop;
-                if (formula[i].match(/[\+\-]/) == null) continue;
-                if (formula[i - 1] == undefined) continue;
-                if (formula[i + 1] == undefined) continue;
+    executeOperation(formula, /[\*]/, multiply);
 
-                var num1 = formula[i] == "-" ? "-" + formula[i + 1] : formula[i + 1];
-                var num2 = formula[i - 2] == "-" ? "-" + formula[i - 1] : formula[i - 1];
-
-                var result = add(num1, num2);
-                formula.splice(i - 1 - (formula[i - 2] == "-"), 3 + (formula[i - 2] == "-"), result);
-                console.log(result)
-                break;
-            }
-        }
-    }
+    executeOperation(formula, /[\+\-]/, add);
 
     return formula[0];
 }

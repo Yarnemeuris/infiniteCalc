@@ -120,3 +120,33 @@ function add(a, b) {
     }
     return result;
 }
+
+function multiply(a, b) {
+    var sign = (a[0] != "-") ^ (b[0] != "-");
+
+    a = a.replace("-", "");
+    b = b.replace("-", "");
+
+    var totalDigitsAfterPoint = digitsAfterPoint(a) + digitsAfterPoint(b);
+
+    a = a.replace(".", "");
+    b = b.replace(".", "");
+
+    var result = "0.";
+    for (var ia = 0; ia < a.length; ia++) {
+        var va = a[a.length - ia - 1];
+
+        for (var ib = 0; ib < b.length; ib++) {
+            var vb = b[b.length - ib - 1];
+
+            var product = va * vb + "0".repeat(ia + ib) + ".";
+
+            result = add(result, product);
+        }
+    }
+
+    result = result.replace(".", "");
+    result = result.slice(0, result.length-totalDigitsAfterPoint).concat(".", result.slice(result.length-totalDigitsAfterPoint));
+    if (sign) result = "-" + result;
+    return result;
+}

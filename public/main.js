@@ -1,11 +1,33 @@
 const outputPreset = '<div class="output"><h3>$</h3><h2>€</h2></div>'
 
+var precision = document.querySelector("#precision").value
+
+document.querySelectorAll("#settingsButton, #close").forEach((element) => element.addEventListener("click", (event) => {
+    document.querySelector("#settings").parentNode.classList.toggle("hide");
+}))
+
+document.querySelector("#precision").addEventListener("input", (event) => {
+    var value = event.target.value
+
+    if (value == "custom") document.querySelector("#customPrecision").classList.remove("hide");
+    else document.querySelector("#customPrecision").classList.add("hide");
+
+    precision = value != "custom" ? value : document.querySelector("#customPrecision").value
+    if (precision == "") precision = "100";
+})
+
+document.querySelector("#customPrecision").addEventListener("input", (event) => {
+    if (document.querySelector("#precision").value != "custom") return
+
+    precision = event.target.value == "" ? "100" : event.target.value;
+})
+
 document.addEventListener("keydown", (event) => {
     if (event.key !== "Enter") return;
 
-    var result = calculate(document.querySelector("#input").value)
-    display(document.querySelector("#input").value, result);
-    document.querySelector("#input").value = "";
+    var result = calculate(event.target.value)
+    display(event.target.value, result);
+    event.target.value = "";
 })
 
 function display(formula, output) {

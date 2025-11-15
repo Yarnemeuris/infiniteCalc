@@ -6,14 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>infinateCalc</title>
     <link rel="stylesheet" href="./index.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script defer src="./main.js"></script>
 </head>
 
 <body>
     <div style="width: 90%; margin:5% auto 0px;">
-        <input type="text" id="input" style="width: 100%;">
+        <input autocomplete="off" type="text" id="input" style="width: 100%;">
     </div>
     <div style="width: 90%; margin: auto;" id="outputs">
+    </div>
+
+    <div id="settingsButton">
+        <i class="material-icons" style="font-size: 48px; color: white;">settings</i>
+    </div>
+    <div class="hide">
+        <div id="settings">
+            <div style="height: 50px;"></div>
+            <i id="close" class="material-icons"
+                style="font-size: 48px; color: white; position: absolute; top: 5px; right: 5px; cursor: pointer;">close</i>
+            <div style="color: white;">
+                max precision:
+                <select id="precision">
+                    <option value="10">10</option>
+                    <option value="100" selected>100</option>
+                    <option value="1000">1000</option>
+                    <option value="custom">custom</option>
+                </select>
+                <input type="number" id="customPrecision" value="500" class="hide">
+            </div>
+        </div>
     </div>
 </body>
 

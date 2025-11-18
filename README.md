@@ -8,8 +8,7 @@ Currently it supports addition, subtraction, multiplication and division. All wi
 
 ## Installation
 
-You can use the demo via this link.
-Or host it yourself with any static file server or the provided server. To use the provided server, run:
+You can use the demo via [this link](https://yarne-meuris.hackclub.app/infiniteCalc/), or host it yourself with any static file server or the provided server. To use the provided server, run:
 ```shell
 $ npm install
 $ node server.js
